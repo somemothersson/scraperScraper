@@ -1,6 +1,7 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var path = require("path")
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -17,7 +18,7 @@ var PORT = 3000;
 var app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
 
 // Use morgan logger for logging requests
@@ -28,7 +29,7 @@ app.use(express.json());
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
-
+app.set('views', path.join(__dirname, 'public/views'))
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -40,6 +41,18 @@ mongoose.connect(MONGODB_URI);
 
 
 // Routes
+app.get("/", function(req,res){
+  // Find all Articles
+  db.Article.find({})
+    .then(function(dbArticle) {
+      // If all Articles are successfully found, send them back to the client
+      res.render("articles", dbArticle)
+    })
+    .catch(function(err) {
+      // If an error occurs, send the error back to the client
+      res.json(err);
+    });
+});
 
 // A GET route for scraping the echoJS website
 // app.get("/scrape", function(req, res) {
