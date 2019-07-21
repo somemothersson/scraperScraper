@@ -12,13 +12,14 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = 3000;
+var PORT = 8080;
 
 // Initialize Express
 var app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
-// app.use(express.static("public"));
+
+app.use(express.static("public"));
 
 
 // Use morgan logger for logging requests
@@ -29,7 +30,7 @@ app.use(express.json());
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
-app.set('views', path.join(__dirname, 'public/views'))
+// app.set('views', path.join(__dirname, 'public/views'))
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
