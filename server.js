@@ -45,9 +45,13 @@ mongoose.connect(MONGODB_URI);
 app.get("/", function(req,res){
   // Find all Articles
   db.Article.find({})
-    .then(function(dbArticle) {
-      // If all Articles are successfully found, send them back to the client
-      res.render("articles", dbArticle)
+    .then(function(data) {
+      console.log(data[0])
+      var hbsObject = {
+        articles: data
+      };
+      console.log(hbsObject)
+      res.render("index", hbsObject)
     })
     .catch(function(err) {
       // If an error occurs, send the error back to the client
