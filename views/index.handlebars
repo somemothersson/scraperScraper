@@ -3,13 +3,17 @@
 <h1>Fierceness: {{fierceness}}</h1> --}}
 <h1>Articles</h1>
 <div class="alert alert-info" role="alert">
-  Still working on this ETA Tuesday PM
+  Still working on this, ETA Wednesay by class (start 85% done)
   
 </div>
- <ul>
 {{#each articles }}
-  <li>{{title}}
-  {{link}}</li>
-{{/each}}
-</ul>
+ <div class="list-group">
+  <a data-id="{{_id}}"type="button" href="{{link}}" target="_blank" class="list-group-item list-group-item-action">{{title}} <button type="button" id="noteButton" class="btn btn-primary btn-sm">Save Article</button></a>
+  
+  {{/each}}
+</div>
+
+ 
+
+
 

@@ -1,51 +1,24 @@
-// Grab the articles as a json
-var axios = require("axios");
-var cheerio = require("cheerio");
 
-$("#submit").on("click", function() {
 
-  axios.get("http://scca-chicago.com/calendar/").then(function(response) {
-        // Then, we load that into cheerio and save it to $ for a shorthand selector
-        var $ = cheerio.load(response.data);
-      
-        // Now, we grab every h2 within an article tag, and do the following:
-        $("div.summary").each(function(i, element) {
-          // Save an empty result object
-          var result = {};
-    
-          // Add the text and href of every link, and save them as properties of the result object
-          result.title = $(this)
-            .children("a")
-            .text();
-          result.link = $(this)
-            .children("a")
-            .attr("href");
-    
-          // Create a new Article using the `result` object built from scraping
-          db.Article.create(result)
-            .then(function(dbArticle) {
-              // View the added result in the console
-              console.log(dbArticle);
-            })
-            .catch(function(err) {
-              // If an error occurred, log it
-              console.log(err);
-            });
-        });
-    
-        // Send a message to the client
-        res.send("Scrape Complete");
-      });
-    // });
+$("#scrape").on("click", function() {
+  console.log("clicked")
+  $.ajax({
+    method: "GET",
+    url: "/scrape" 
+  })
+    .then(function(data) {
+      // Log the response
+      console.log(data);
+    });
     
 });
 
 
 // Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+$("a").on("click", function() {
   // Empty the notes from the note section
   $("#notes").empty();
-  // Save the id from the p tag
+  // Save the id from the a tag
   var thisId = $(this).attr("data-id");
 
   // Now make an ajax call for the Article
@@ -76,7 +49,7 @@ $(document).on("click", "p", function() {
 });
 
 // When you click the savenote button
-$(document).on("click", "#savenote", function() {
+$("#savenote").on("click", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
