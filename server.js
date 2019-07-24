@@ -58,6 +58,24 @@ app.get("/", function(req,res){
       res.json(err);
     });
 });
+app.get("/saved", function(req,res){
+  // Find all Articles
+ 
+  db.Article.find({saved:true})
+    .then(function(data) {
+      console.log(data[0])
+      var hbsObject = {
+        articles: data
+      };
+      console.log(hbsObject)
+      res.render("saved", hbsObject)
+    })
+    .catch(function(err) {
+      // If an error occurs, send the error back to the client
+      res.json(err);
+    });
+});
+
 
 //A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
@@ -111,6 +129,7 @@ app.get("/articles", function(req, res) {
       res.json(err);
     });
 });
+
 app.get("/notes", function(req, res) {
   // TODO: Finish the route so it grabs all of the articles
 
@@ -144,6 +163,38 @@ app.get("/articles/:id", function(req, res) {
     res.json(err);
   });
 
+});
+
+//routes for saving and unsaving article
+app.put("/save/:id", function(req, res) {
+  // Create a new user using req.body
+console.log(req.params.id)
+  db.Article.update({_id : req.params.id},
+ {$set : {saved : true}})
+
+    .then(function(dbArticle) {
+      // If saved successfully, send the the new User document to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurs, send the error to the client
+      res.json(err);
+    });
+});
+app.put("/unsave/:id", function(req, res) {
+  // Create a new user using req.body
+console.log(req.params.id)
+  db.Article.update({_id : req.params.id},
+ {$set : {saved : false}})
+
+    .then(function(dbArticle) {
+      // If saved successfully, send the the new User document to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurs, send the error to the client
+      res.json(err);
+    });
 });
 
 // Route for saving/updating an Article's associated Note

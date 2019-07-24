@@ -15,9 +15,9 @@ $("#scrape").on("click", function() {
 
 
 // Whenever someone clicks a p tag
-$("a").on("click", function() {
+$("#savenote").on("click", function() {
   // Empty the notes from the note section
-  $("#notes").empty();
+  
   // Save the id from the a tag
   var thisId = $(this).attr("data-id");
 
@@ -48,31 +48,66 @@ $("a").on("click", function() {
     });
 });
 
-// When you click the savenote button
-$("#savenote").on("click", function() {
+// When you click the save article button
+$("#save").on("click", function() {
   // Grab the id associated with the article from the submit button
-  var thisId = $(this).attr("data-id");
-
+  var thisId = $("#item").attr("data-id");
+console.log(`id = ${thisId}`)
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
-    method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      // Value taken from title input
-      title: $("#titleinput").val(),
-      // Value taken from note textarea
-      body: $("#bodyinput").val()
-    }
-  })
+    method: "PUT",
+    url: "/save/" + thisId}
+   )
     // With that done
     .then(function(data) {
       // Log the response
       console.log(data);
       // Empty the notes section
-      $("#notes").empty();
-    });
 
-  // Also, remove the values entered in the input and textarea for note entry
-  $("#titleinput").val("");
-  $("#bodyinput").val("");
-});
+    });
+  });
+
+  $("#delete").on("click", function() {
+    // Grab the id associated with the article from the submit button
+    var thisId = $("#item").attr("data-id");
+  console.log(`id = ${thisId}`)
+    // Run a POST request to change the note, using what's entered in the inputs
+    $.ajax({
+      method: "PUT",
+      url: "/unsave/" + thisId}
+     )
+      // With that done
+      .then(function(data) {
+        // Log the response
+        console.log(data);
+        // Empty the notes section
+  
+      });
+    });
+  
+    $("#note").on("click", function() {
+      var thisId = $("#item").attr("data-id");
+      console.log(thisId)
+//       <div class="modal" tabindex="-1" role="dialog">
+//   <div class="modal-dialog" role="document">
+//     <div class="modal-content">
+//       <div class="modal-header">
+//         <h5 class="modal-title">Modal title</h5>
+//         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//           <span aria-hidden="true">&times;</span>
+//         </button>
+//       </div>
+//       <div class="modal-body">
+//         <p>Modal body text goes here.</p>
+//       </div>
+//       <div class="modal-footer">
+//         <button type="button" class="btn btn-primary">Save changes</button>
+//         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+  
+      });
+    
+  

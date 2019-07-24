@@ -8,7 +8,10 @@
 </div>
 {{#each articles }}
  <div class="list-group">
-  <a data-id="{{_id}}"type="button" href="{{link}}" target="_blank" class="list-group-item list-group-item-action">{{title}} <button type="button" id="noteButton" class="btn btn-primary btn-sm">Save Article</button></a>
+  <a id="item" data-id="{{_id}}"class="list-group-item list-group-item-action">
+    {{title}} 
+    <button type="button" id="save" class="btn btn-primary btn-sm">Save Article</button>
+    </a>
   
   {{/each}}
 </div>
