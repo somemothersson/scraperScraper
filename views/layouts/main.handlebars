@@ -15,22 +15,36 @@
 
 <body>
 	<div class="container">
-		<ul class="nav">
-			<li class="nav-item">
-				<a class="nav-link active" href="/">Home</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/saved">Saved Articles</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link"><button type="button" id="scrape" class="btn btn-secondary btn-sm">SCRAPE</button></a>
-			</li>
+		<nav class="navbar navbar-dark bg-dark">
 		
-		</ul>
-		<div class="jumbotron">
-			<h1 class="display-4">SCCA Chicago Event Scraper</h1>
-			<p class="lead">Checkout SCCA Chicago Events.</p>
+			<a class="navbar-brand" href="/">SCCA Chicago Scraper</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/saved">Saved Articles</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link"><button type="button" id="scrape"
+								class="btn btn-secondary btn-sm">SCRAPE</button></a>
+					</li>
+
+				</ul>
+
+			{{!-- </div> --}}
+		</nav>
+		<div class="jumbotron">
+			<div class="jumbo-text">
+				<h1 class="display-4">SCCA Chicago Event Scraper</h1>
+				<p class="lead">Checkout SCCA Chicago Events.</p>
+			</div>
 
 		</div>
 		{{{ body }}}
